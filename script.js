@@ -10,6 +10,8 @@ let currentPlayer = PlayerTypes.NOT_DEFINDED;
 let gameBoard;
 let availableCells;
 
+let gameIsRunning = 0;
+
 document.addEventListener('DOMContentLoaded', startGame);
 
 function startGame() {
@@ -17,6 +19,7 @@ function startGame() {
   changeCurrentPlayer();
   gameBoard = Array.from(Array(7), () => new Array(6).fill(-1));
   availableCells = 42;
+  gameIsRunning = 1;
 }
 
 function createBoard() {
@@ -44,6 +47,8 @@ function changeCurrentPlayer() {
 }
 
 function onClick(e) {
+  if (!gameIsRunning) return;
+
   let col = e.target;
   if (e.target.className === 'cell') {
     col = e.target.parentElement;
@@ -59,8 +64,10 @@ function onClick(e) {
 
     if (win(currentPlayer, x, y)) {
       alert(`${playerColor[currentPlayer].capitalize()} Player WON!!!`);
+      gameIsRunning = 0;
     } else if (availableCells === 0) {
       alert(`DRAW!!!!!`);
+      gameIsRunning = 0;
     } else {
       changeCurrentPlayer();
     }
