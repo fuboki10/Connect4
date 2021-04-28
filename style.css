@@ -1,11 +1,8 @@
-body {
-  font-family: 'Odibee Sans', cursive;
-  font-size: 1.5em;
-}
-
 .game-header {
   margin: auto;
   text-align: center;
+  font-family: 'Odibee Sans', cursive;
+  font-size: 1.5em;
 }
 
 .board {
@@ -28,4 +25,9 @@ body {
 .col {
   display: flex;
   flex-wrap: wrap;
+}
+
+footer {
+  text-align: center;
+  margin: 40px;
 }
