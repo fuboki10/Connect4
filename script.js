@@ -23,7 +23,7 @@ function createBoard() {
     for (let j = 0; j < 6; j++) {
       let row = document.createElement('div');
       row.className = 'cell';
-      row.setAttribute('cell-id', i * 6 + j);
+      row.id = i * 6 + j;
       col.appendChild(row);
     }
     col.addEventListener('click', onClick);
@@ -44,12 +44,29 @@ function changeCurrentPlayer() {
 }
 
 function onClick(e) {
-  let row = e.target;
+  let col = e.target;
   if (e.target.className == 'cell') {
-    row = e.target.parentElement;
+    col = e.target.parentElement;
   }
 
-  let columnNumber = Number(row.getAttribute('col-id')) + 1;
+  let columnNumber = Number(col.getAttribute('col-id')) + 1;
 
-  console.log(`you clicked on row = ${columnNumber}!`);
+  console.log(`you clicked on col = ${columnNumber}!`);
+
+  let selectedCellId = getFirstAvailableCell(col);
+
+  if (selectedCellId != -1) changeCurrentPlayer();
+}
+
+function getFirstAvailableCell(column) {
+  let rows = Array.from(column.children).reverse();
+  for (let cell of rows) {
+    if (cell.style.backgroundColor == '') {
+      if (currentPlayer == PlayerTypes.RED) cell.style.backgroundColor = 'red';
+      else cell.style.backgroundColor = 'yellow';
+
+      return Number(cell.id);
+    }
+  }
+  return -1;
 }
