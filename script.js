@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', loadDOM);
 
 function loadDOM() {
   document.getElementById('new-game-btn').addEventListener('click', startGame);
-  currentPlayer = PlayerTypes.NOT_DEFINDED;
   startGame();
 }
 
 function startGame() {
+  currentPlayer = PlayerTypes.NOT_DEFINDED;
   createBoard();
   changeCurrentPlayer();
   gameBoard = Array.from(Array(7), () => new Array(6).fill(-1));
