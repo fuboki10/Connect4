@@ -6,13 +6,19 @@ let PlayerTypes = {
 
 let playerColor = ['red', 'yellow'];
 
-let currentPlayer = PlayerTypes.NOT_DEFINDED;
+let currentPlayer;
 let gameBoard;
 let availableCells;
 
 let gameIsRunning = 0;
 
-document.addEventListener('DOMContentLoaded', startGame);
+document.addEventListener('DOMContentLoaded', loadDOM);
+
+function loadDOM() {
+  document.getElementById('new-game-btn').addEventListener('click', startGame);
+  currentPlayer = PlayerTypes.NOT_DEFINDED;
+  startGame();
+}
 
 function startGame() {
   createBoard();
@@ -24,6 +30,7 @@ function startGame() {
 
 function createBoard() {
   let board = document.querySelector('.board');
+  board.innerHTML = '';
   for (let i = 0; i < 7; i++) {
     let col = document.createElement('div');
     col.className = 'col';
