@@ -1,5 +1,5 @@
 .game-header {
-  --margin: auto;
+  margin: auto;
   text-align: center;
   font-family: 'Odibee Sans', cursive;
   font-size: 1.3em;
@@ -46,6 +46,7 @@ button {
   transition-duration: 0.4s;
   border: 2px solid #000;
   cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
 }
 
 button:hover {
