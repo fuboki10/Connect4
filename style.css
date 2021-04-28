@@ -1,0 +1,26 @@
+body {
+  font-family: 'Odibee Sans', cursive;
+  font-size: 1.5em;
+}
+
+.game-header {
+  margin: auto;
+  text-align: center;
+}
+
+.board {
+  width: 700px;
+  height: 600px;
+  background-color: blue;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cell {
+  background-color: #fff;
+  width: 98px;
+  height: 98px;
+  margin: 1px;
+  border-radius: 50%;
+}
