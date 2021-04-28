@@ -13,14 +13,19 @@ body {
   height: 600px;
   background-color: blue;
   margin: auto;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .cell {
   background-color: #fff;
-  width: 98px;
-  height: 98px;
-  margin: 1px;
+  width: 95px;
+  height: 95px;
+  margin: 2.5px;
   border-radius: 50%;
+}
+
+.col {
+  display: flex;
+  flex-wrap: wrap;
 }
