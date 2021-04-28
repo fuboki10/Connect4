@@ -4,18 +4,23 @@ let PlayerTypes = {
   NOT_DEFINDED: -1,
 };
 
-let board;
+let playerColor = ['red', 'yellow'];
+
 let currentPlayer = PlayerTypes.NOT_DEFINDED;
+let gameBoard;
+let availableCells;
 
-document.addEventListener('DOMContentLoaded', loadDOM);
+document.addEventListener('DOMContentLoaded', startGame);
 
-function loadDOM() {
-  board = document.querySelector('.board');
+function startGame() {
   createBoard();
   changeCurrentPlayer();
+  gameBoard = Array.from(Array(7), () => new Array(6, -1));
+  availableCells = 42;
 }
 
 function createBoard() {
+  let board = document.querySelector('.board');
   for (let i = 0; i < 7; i++) {
     let col = document.createElement('div');
     col.className = 'col';
@@ -34,13 +39,8 @@ function createBoard() {
 function changeCurrentPlayer() {
   currentPlayer = (currentPlayer + 1) % 2;
   let currentPlayerSpan = document.getElementById('current-player');
-  if (currentPlayer == PlayerTypes.RED) {
-    currentPlayerSpan.innerHTML = 'Red';
-    currentPlayerSpan.style.color = 'red';
-  } else {
-    currentPlayerSpan.innerHTML = 'Yellow';
-    currentPlayerSpan.style.color = 'yellow';
-  }
+  currentPlayerSpan.style.color = playerColor[currentPlayer];
+  currentPlayerSpan.innerHTML = playerColor[currentPlayer];
 }
 
 function onClick(e) {
@@ -55,18 +55,24 @@ function onClick(e) {
 
   let selectedCellId = getFirstAvailableCell(col);
 
-  if (selectedCellId != -1) changeCurrentPlayer();
+  if (selectedCellId != -1) {
+    availableCells--;
+    changeCurrentPlayer();
+  }
 }
 
 function getFirstAvailableCell(column) {
   let rows = Array.from(column.children).reverse();
   for (let cell of rows) {
     if (cell.style.backgroundColor == '') {
-      if (currentPlayer == PlayerTypes.RED) cell.style.backgroundColor = 'red';
-      else cell.style.backgroundColor = 'yellow';
+      let selectedCell = Number(cell.id);
+      cell.style.backgroundColor = playerColor[currentPlayer];
+      gameBoard[Math.floor(selectedCell / 7)][selectedCell % 6] = currentPlayer;
 
       return Number(cell.id);
     }
   }
   return -1;
 }
+
+function win() {}
